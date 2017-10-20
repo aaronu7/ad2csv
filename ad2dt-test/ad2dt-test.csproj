@@ -86,9 +86,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ad2csv\ad2csv.csproj">
+    <ProjectReference Include="..\ad2dt\ad2dt.csproj">
       <Project>{8795b1e0-491e-4e45-a4a7-7ef48d79178d}</Project>
-      <Name>ad2csv</Name>
+      <Name>ad2dt</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

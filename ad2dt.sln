@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ad2csv", "ad2csv\ad2csv.csproj", "{8795B1E0-491E-4E45-A4A7-7EF48D79178D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ad2dt", "ad2dt\ad2dt.csproj", "{8795B1E0-491E-4E45-A4A7-7EF48D79178D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ad2csv-test", "ad2csv-test\ad2csv-test.csproj", "{1684EE60-65C7-4806-8CD1-AA4FBD56052C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ad2dt-test", "ad2dt-test\ad2dt-test.csproj", "{1684EE60-65C7-4806-8CD1-AA4FBD56052C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
