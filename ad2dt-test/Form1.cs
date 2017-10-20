@@ -15,9 +15,9 @@ namespace ad2csv_test
         public Form1()
         {
             InitializeComponent();
-            tbDomain.Text = "sd27.bc.ca";
+            tbDomain.Text = "domain.bc.ca";
             tbUsr.Text = "administrator";
-            tbPwd.Text = "6unnyWa66!t";
+            tbPwd.Text = "";
             SetText(textBox1, this.BackColor, "Ready");
         }
 

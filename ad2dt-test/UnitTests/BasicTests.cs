@@ -15,11 +15,11 @@ namespace ad2csv_test.UnitTests
         [SetUp] public void Setup() {}
         [TearDown] public void TestTearDown() {}
 
-        #region " InputTestADQuery " 
+        #region " TestADQuery " 
 
         public static IEnumerable InputTestADQuery {
             get {
-                string domain = "sd27.bc.ca";
+                string domain = "domain.bc.ca";
                 string usr = "administrator";
                 string pwd = "";
                 string ouLimit = "";
