@@ -7,19 +7,19 @@ using ad2csv.Db.LDAP;
 
 namespace ad2csv.Db.LDAP
 {
-    public class ADtoDataTable
+    static public class Ad2DataTable
     {
-        public DataSet Ad2DataTable(string domain, string usr, string pwd) {
+        static public DataSet ExtractDataSet(string domain, string usr, string pwd, string ouLimit, int pageSize) {
             DataSet oDs = new DataSet();
-            oDs.Tables.Add(AdGroups2DataTable(domain, "", usr, pwd));
-            oDs.Tables.Add(AdOrgUnits2DataTable(domain, "", usr, pwd));
-            oDs.Tables.Add(AdUsers2DataTable(domain, "", usr, pwd));
+            oDs.Tables.Add(ExtractDataTable_Groups(domain, usr, pwd, ouLimit, pageSize));
+            oDs.Tables.Add(ExtractDataTable_Units(domain, usr, pwd, ouLimit, pageSize));
+            oDs.Tables.Add(ExtractDataTable_Users(domain, usr, pwd, ouLimit, pageSize));
             return oDs;
         }
 
-        # region " AdGroups2DataTable "
+        # region " ExtractDataTable_Groups "
 
-        protected DataTable AdGroups2DataTable(string Domain, string SearchOU, string usr, string pwd) 
+        static public DataTable ExtractDataTable_Groups(string Domain, string usr, string pwd, string ouLimit, int pageSize) 
         {
             string ObjectClass = "group";
 
@@ -30,10 +30,10 @@ namespace ad2csv.Db.LDAP
             oDt.Columns.Add(new DataColumn("cn", Type.GetType("System.String")));
             oDt.Columns.Add(new DataColumn("membership", Type.GetType("System.String")));
 
-            string path = HelperLDAP.GetLdapPath(Domain, SearchOU);
+            string path = HelperLDAP.GetLdapPath(Domain, ouLimit);
 			DirectoryEntry dePath = new DirectoryEntry(path, usr, pwd);
 
-            SearchResultCollection oResults = HelperLDAP.ObjectFindSet(dePath, ObjectClass, "", "", "");
+            SearchResultCollection oResults = HelperLDAP.ObjectFindSet(dePath, ObjectClass, "", pageSize);
             if(oResults != null) {
                 foreach(SearchResult res in oResults) {
                     DirectoryEntry oEntry = res.GetDirectoryEntry();
@@ -58,9 +58,9 @@ namespace ad2csv.Db.LDAP
 
         # endregion
 
-        # region " AdOrgUnits2DataTable "
+        # region " ExtractDataTable_Units "
 
-        protected DataTable AdOrgUnits2DataTable(string Domain, string SearchOU, string usr, string pwd) 
+        static public DataTable ExtractDataTable_Units(string Domain, string usr, string pwd, string ouLimit, int pageSize) 
         {
             string ObjectClass = "OrganizationalUnit";
 
@@ -70,10 +70,10 @@ namespace ad2csv.Db.LDAP
             oDt.Columns.Add(new DataColumn("ou",     Type.GetType("System.String")));
             oDt.Columns.Add(new DataColumn("cn", Type.GetType("System.String")));
 
-            string path = HelperLDAP.GetLdapPath(Domain, SearchOU);
+            string path = HelperLDAP.GetLdapPath(Domain, ouLimit);
 			DirectoryEntry dePath = new DirectoryEntry(path, usr, pwd);
 
-            SearchResultCollection oResults = HelperLDAP.ObjectFindSet(dePath, ObjectClass, "", "", "");
+            SearchResultCollection oResults = HelperLDAP.ObjectFindSet(dePath, ObjectClass, "", pageSize);
             if(oResults != null) {
                 foreach(SearchResult res in oResults)
                 {
@@ -98,9 +98,9 @@ namespace ad2csv.Db.LDAP
 
         # endregion
 
-        # region " AdUsers2DataTable "
+        # region " ExtractDataTable_Users "
 
-        protected DataTable AdUsers2DataTable(string Domain, string SearchOU, string usr, string pwd) 
+        static public DataTable ExtractDataTable_Users(string Domain, string usr, string pwd, string ouLimit, int pageSize) 
         {
             string ObjectClass = "user";
 
@@ -123,12 +123,16 @@ namespace ad2csv.Db.LDAP
             oDt.Columns.Add(new DataColumn("description", Type.GetType("System.String"))); 
             oDt.Columns.Add(new DataColumn("membership", Type.GetType("System.String")));   //"students.groups.sd27,readers.groups.sd27,superusers.test.sd27"
             oDt.Columns.Add(new DataColumn("path", Type.GetType("System.String")));
+            oDt.Columns.Add(new DataColumn("extensionAttribute1", Type.GetType("System.String")));
+            oDt.Columns.Add(new DataColumn("extensionAttribute2", Type.GetType("System.String")));
+            oDt.Columns.Add(new DataColumn("extensionAttribute3", Type.GetType("System.String")));
+            
 
-            string path = HelperLDAP.GetLdapPath(Domain, SearchOU);
+            string path = HelperLDAP.GetLdapPath(Domain, ouLimit);
 			DirectoryEntry dePath = new DirectoryEntry(path, usr, pwd);
             //DataTable oDt = BuildDt();
 
-            SearchResultCollection oResults = HelperLDAP.ObjectFindSet(dePath, ObjectClass, "", "", "");
+            SearchResultCollection oResults = HelperLDAP.ObjectFindSet(dePath, ObjectClass, "", pageSize);
             if(oResults != null) {
                 foreach(SearchResult res in oResults)
                 {

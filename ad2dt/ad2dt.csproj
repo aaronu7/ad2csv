@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Db\LDAP\ADtoDataTable.cs" />
+    <Compile Include="Db\LDAP\Ad2DataTable.cs" />
     <Compile Include="Db\LDAP\HelperLDAP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

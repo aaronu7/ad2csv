@@ -172,29 +172,12 @@ namespace ad2csv.Db.LDAP
 
         #region " ObjectFindSet "
 
-        static public SearchResultCollection ObjectFindSet(DirectoryEntry dePath, string ObjectClass, string ContextName, string ObjectCategory, string ANRFilter) 
+        static public SearchResultCollection ObjectFindSet(DirectoryEntry dePath, string ObjectClass, string ContextName, int pageSize) 
         {
 			DirectorySearcher deSearch = new DirectorySearcher();
-            deSearch.PageSize = 100000;
+            deSearch.PageSize = pageSize;
 			deSearch.SearchRoot = dePath;
-
-            //dePath.Path
-
-            //DirectorySearcher ds = new DirectorySearcher(
-            //    entry,
-            //    "(objectClass=organizationalUnit")
-            //    null,
-            //    SearchScope.OneLevel      // limits to searching only the immediate level
-            //    );
-
-
-            //ANR = Ambiguous Name Resolution - this allows you to search for a name without explicitly specifying which attribute to look it
-            // ds.Filter = "(&(anr=" & txtSearch.Text & ")(objectCategory=person))"
-            // mySearcher.Filter = ("(objectClass=computer)")
-
-            //This filter here will select all the DISABLED accounts - that's those
-            //that have the bit #2 in UserAccountControl set to true.
-            //(userAccountControl:1.2.840.113556.1.4.803:=2)
+            
             string ObjName = GetObjectName(ObjectClass, ContextName);
             string filter = "";
             if(ContextName == "")
@@ -204,12 +187,10 @@ namespace ad2csv.Db.LDAP
 
             deSearch.Filter = filter;
             SearchResultCollection results = null;
-            try
-            {
+            try {
                 // Can't quiet the error when the object is not found
                 results = deSearch.FindAll();
-            }
-            catch { 
+            } catch { 
                 System.Console.WriteLine("Exception caused by a failure to find the AD object.");
             }
 

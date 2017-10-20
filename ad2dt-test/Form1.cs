@@ -15,9 +15,9 @@ namespace ad2csv_test
         public Form1()
         {
             InitializeComponent();
-            tbDomain.Text = "domain.bc.ca";
+            tbDomain.Text = "sd27.bc.ca";
             tbUsr.Text = "administrator";
-            tbPwd.Text = "";
+            tbPwd.Text = "6unnyWa66!t";
             SetText(textBox1, this.BackColor, "Ready");
         }
 
@@ -30,7 +30,7 @@ namespace ad2csv_test
         {
             if(!isRunning) {
                 isRunning = true;
-                SetText(textBox1, Color.Red, "Running");
+                SetText(textBox1, Color.Red, "Running" + Environment.NewLine + "This may take awhile.");
                 Thread oThread = new Thread(RunExtract);
                 oThread.Start();
             } else {
@@ -39,8 +39,12 @@ namespace ad2csv_test
         }
 
         protected void RunExtract() {
-            ADtoDataTable oExtractor = new ADtoDataTable();
-            DataSet oDs = oExtractor.Ad2DataTable(tbDomain.Text, tbUsr.Text, tbPwd.Text);
+            int pageSize = 0;
+            Int32.TryParse(tbPagesize.Text, out pageSize);
+            if(pageSize == 0)
+                pageSize = 100000;
+
+            DataSet oDs = Ad2DataTable.ExtractDataSet(tbDomain.Text, tbUsr.Text, tbPwd.Text, tbOULimit.Text, pageSize);
             SetGridSource(dataGridView1, oDs.Tables["AD_Users"]);
             SetGridSource(dataGridView2, oDs.Tables["AD_Groups"]);
             SetGridSource(dataGridView3, oDs.Tables["AD_Units"]);
