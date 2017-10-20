@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Db\LDAP\Ad2DataTable.cs" />
-    <Compile Include="Db\LDAP\HelperLDAP.cs" />
+    <Compile Include="Db\LDAP\HelperLdapGet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

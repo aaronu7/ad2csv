@@ -5,6 +5,5 @@ This module was developed as part of a User Syncronization automation process wh
 
 
 Potential Upgrades:
-- Develop Unit Tests
 - Extract Group memberships
 - Extract additional user attributes
