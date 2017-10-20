@@ -1,6 +1,6 @@
 # ad2dt
 
-This module was developed as part of a User Syncronization automation process which updates Active Directory based on the operational data from human resources. In production this module is configured as a sceduled console application and a triggerable web-service that will write the DataTable out to a CSV in a temporal repository (using csvplus-read-write https://github.com/aaronu7/csvplus-read-write).
+This module queries Active Directory for users, groups and organizational units and stores the objects/attributes in tabular DataTables. The module was developed as part of a User Synchronization automation process which updates Active Directory based on the operational data from human resources. In production this module is configured as a scheduled console application and a triggerable web-service that will write the DataTables out to CSV files in a temporal repository (using csvplus-read-write https://github.com/aaronu7/csvplus-read-write).
 
 Project Notes:
 - Developed in VS2015 using the nunit package for unit testing.
