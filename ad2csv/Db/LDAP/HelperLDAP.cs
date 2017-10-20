@@ -86,6 +86,25 @@ namespace ad2csv.Db.LDAP
 
         #region " GetPropertyAs... "
 
+        public static String GetPropertyAsStringSet(DirectoryEntry oEntry, string Prop, string div) {
+            string res = "";
+            if(oEntry.Properties.Contains(Prop)) {
+                if (oEntry.Properties[Prop].Count > 0) {
+                    System.DirectoryServices.PropertyValueCollection oPropSet = (System.DirectoryServices.PropertyValueCollection)oEntry.Properties["mail"];
+                    foreach(string val in oPropSet) {
+                        if(val.Trim() != "") {
+                            if(res == "") { 
+                                res = val;
+                            } else {
+                                res = res + div + val;
+                            }
+                        }
+                    }
+                }
+            }
+            return res;
+        }
+
         public static String GetPropertyAsString(DirectoryEntry oEntry, string Prop) {
             object oProp = GetPropertyObject(oEntry, Prop);
 
